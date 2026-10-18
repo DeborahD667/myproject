@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="What encryption protects, how certificates support identity, and why a secure connection is only part of the story.">
+  <title>HTTPS and connection security</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="evolution.html">HTTP History</a>
+      <a href="https.html" aria-current="page">HTTPS</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>HTTPS and connection security</h1>
+      <p>What encryption protects, how certificates support identity, and why a secure connection is only part of the story.</p>
+    </header>
+    
+      
+        <section id="protection"><h2>HTTP with a protected connection</h2><p>HTTPS uses HTTP over a secured connection. The application still exchanges methods, headers, status codes, and content. TLS provides the security properties that ordinary unencrypted HTTP lacks. <a href="references.html#rfc9110">[5]</a></p>
+          <dl><dt>Confidentiality</dt><dd>Encryption makes application data unreadable to someone merely observing the network path.</dd><dt>Integrity</dt><dd>Cryptographic protection helps detect unauthorized changes to data in transit.</dd><dt>Authentication</dt><dd>Certificate validation helps a browser establish that the server is authorized for the requested hostname.</dd></dl><p class="source-note">TLS security goals: <a href="references.html#rfc8446">RFC 8446 [6]</a>.</p>
+        </section>
+        <section id="tls"><h2>TLS and the certificate chain</h2><p>In a simplified TLS handshake, the client and server negotiate security parameters and establish shared keys. The server normally supplies a certificate, and the browser checks the hostname and a chain of trust to a trusted authority. TLS 1.3 protects application data using negotiated symmetric keys. <a href="references.html#rfc8446">[6]</a></p>
+          <figure><img src="assets/https-layers.svg" width="960" height="400" loading="lazy" alt="HTTP defines the meaning of requests and responses. TLS protects the connection. TCP carries HTTP/1.1 and HTTP/2, while HTTP/3 uses QUIC with TLS 1.3 integrated."><figcaption>Figure 2. A simplified view of HTTP and security. QUIC integrates TLS 1.3 rather than placing a separate TLS record layer above TCP. Based on RFC 8446 and RFC 9114.</figcaption></figure>
+          <p>A valid certificate helps establish the server’s identity for a domain. It does not prove that the website’s owner is honest or that every page is safe. Users should still check the exact domain and treat unexpected requests for credentials cautiously.</p>
+        </section>
+        <section id="limits"><h2>What HTTPS does not solve</h2><ul><li>A phishing website can use HTTPS and a valid certificate for its own domain.</li><li>Encryption in transit does not prevent vulnerable application code or compromised accounts.</li><li>Protection on the connection does not determine how the server stores or shares information afterward.</li></ul><aside class="note"><h3>Connection security and website trust</h3><p>HTTPS protects communication with the identified server. Safe use also depends on the application, the user’s device, and the organization handling the data.</p></aside></section>
+        <section id="practice"><h2>Example: submitting a form</h2><p>Imagine entering information into an inquiry form. With HTTPS, the connection protects the submission in transit. The server must still validate the input, restrict access, and store it appropriately. A POST request alone does not encrypt a submission; the protected connection matters.</p><p>To explore this distinction, inspect the connection information for a familiar HTTPS site. Find the hostname and certificate details. Browser interfaces differ, so the location of these controls can vary.</p></section>
+        <p>Keep learning <a href="concepts.html">Explore the seven key concepts ↗</a></p>
+      
+    
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="From simple document requests to encrypted, multiplexed connections. Explore how the Web’s conversation evolved.">
+  <title>The evolution of HTTP and HTTPS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="evolution.html">HTTP History</a>
+      <a href="https.html">HTTPS</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>The evolution of HTTP and HTTPS</h1>
+      <p>From simple document requests to encrypted, multiplexed connections. Explore how the Web’s conversation evolved.</p>
+    </header>
+    
+      <section aria-labelledby="overview">
+        <h2 id="overview">A small protocol. A changing Web.</h2>
+        <p>Every time a browser asks for a page, a conversation begins. HTTP defines the requests and responses in that conversation. Its evolution shows how the Web adapted from linked documents to applications, APIs, and media.</p>
+        <p>This research follows HTTP from its early form through HTTP/3, then explains how HTTPS protects the connection. The central idea is continuity: familiar methods and status codes remain useful even when message formats and transports change.</p>
+        <p class="source-note">Research basis: <a href="references.html#rfc9110">RFC 9110</a>, <a href="references.html#rfc9113">RFC 9113</a>, and <a href="references.html#rfc9114">RFC 9114</a>.</p>
+        <a href="evolution.html">Start with HTTP evolution ↗</a>
+      </section>
+      <aside aria-labelledby="contents-title">
+        <h2 id="contents-title">Contents</h2>
+        <ol>
+          <li><a href="evolution.html"><strong>HTTP evolution</strong></a><p>Versions, transport, and performance.</p></li>
+          <li><a href="https.html"><strong>HTTPS &amp; security</strong></a><p>Encryption, trust, and their limits.</p></li>
+          <li><a href="concepts.html"><strong>Key concepts</strong></a><p>Seven terms that connect the story.</p></li>
+          <li><a href="references.html"><strong>References</strong></a><p>Standards and further learning.</p></li>
+          <li><a href="about.html"><strong>About this project</strong></a><p>The author and learning objectives.</p></li>
+        </ol>
+      </aside>
+    
+    <section aria-labelledby="conversation-title">
+      <h2 id="conversation-title">The request–response conversation</h2>
+      <figure>
+        <img src="assets/http-exchange.svg" width="1000" height="340" alt="A browser sends a GET request to a server. The server returns a 200 OK response and the requested HTML.">
+        <figcaption>Figure 1. A simplified exchange. A page can trigger additional requests for stylesheets, images, and other resources. Original illustration based on RFC 9110.</figcaption>
+      </figure>
+    </section>
+    <section aria-labelledby="terms-title">
+      <h2 id="terms-title">Key terms at a glance</h2>
+      <p>HTTP · HTTPS · request · response · TLS · certificate · multiplexing</p>
+      <a href="concepts.html">Read the definitions</a>
+    </section>
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
+
+# HTTP and HTTPS — IT 3203 Milestone 1
+
+Author: Deborah Daramola
+Topic: The Evolution of HTTP and HTTPS
+
+## Open locally
+Extract the ZIP into a folder, then open index.html in a browser. All navigation and images use relative paths. No build, JavaScript, external CSS, framework, or package installation is required.
+
+## Files
+- index.html — abstract, key terms, and table of contents
+- evolution.html — HTTP history, version table, and browser exercise
+- https.html — TLS, certificates, and limits of connection security
+- concepts.html — seven key concepts
+- references.html — technical sources and learning resources
+- about.html — author introduction and project purpose
+- styles.css — the only stylesheet
+- assets/ — two original, accessible SVG illustrations
+
+## GitHub Pages publication (required for course submission)
+1. Sign in to GitHub and create a dedicated repository, for example it3203-http-evolution.
+2. Upload the extracted website files to the repository ROOT. index.html should sit at the top level, with styles.css and assets/ alongside it. Do not upload only the ZIP or an extra enclosing folder.
+3. Open repository Settings > Pages. Under Build and deployment, choose Deploy from a branch, then main and /(root). Save.
+4. Wait for GitHub to publish the site, then use the URL displayed in Pages settings. For a standard project site it is usually https://YOUR-USERNAME.github.io/it3203-http-evolution/.
+5. Open that URL, check all six pages and both images, and submit the working clickable link in the D2L comment box. Attach this source ZIP as required.
+
+These instructions follow GitHub’s “Creating a GitHub Pages site” guide:
+https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
+Repository visibility and Pages availability depend on the GitHub account’s plan and policies.
+
+## Requirement map
+- Six pages with identical main navigation and current-page indication.
+- Home page contains a title, abstract, key terms, and linked contents.
+- Two research pages, references, seven concepts, and an About page.
+- Headings, lists, images with alternatives, and an accessible comparison table.
+- One CSS file. Element selectors: body, h1, table. Class selectors: .site-header, .note. ID selector: #main.
+- Flexbox for a basic wrapping navigation menu; single-column content.
+- Link hover and focus effects, margins, padding, borders, colors, and font settings.
+- HTML/CSS comments, class-project footer, and the course link.
+- Basic narrow-screen styling.
+
+Review and personalize the About page and understand the source before submitting. The simple design uses a blue header, a white content area, standard headings, and basic borders. It uses no copied site template or whole-site framework. GitHub Pages publication is a separate final step because this package is not connected to your GitHub account.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Technical standards and learning resources behind the research, organized for deeper study.">
+  <title>Sources and further reading</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="evolution.html">HTTP History</a>
+      <a href="https.html">HTTPS</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html" aria-current="page">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>Sources and further reading</h1>
+      <p>Technical standards and learning resources behind the research, organized for deeper study.</p>
+    </header>
+    <section aria-labelledby="standards"><h2 id="standards">Primary standards</h2><p>Numbered citations on the topic pages link to these entries. RFCs provide the technical basis, while the original Assignment 1 research supplies the starting structure.</p>
+      <ol>
+        <li id="rfc1945"><strong>[1] HTTP/1.0</strong><p>Berners-Lee, T., Fielding, R., &amp; Frystyk, H. (1996). <cite>Hypertext Transfer Protocol — HTTP/1.0</cite>. RFC 1945.</p><a href="https://www.rfc-editor.org/rfc/rfc1945.html">Read RFC 1945 ↗</a><p class="source-note">Useful for the early protocol and the HTTP/1.0 message model.</p></li>
+        <li id="rfc9112"><strong>[2] HTTP/1.1</strong><p>Fielding, R., Nottingham, M., &amp; Reschke, J. (Eds.). (2022). <cite>HTTP/1.1</cite>. RFC 9112.</p><a href="https://www.rfc-editor.org/rfc/rfc9112.html">Read RFC 9112 ↗</a><p class="source-note">Explains message framing and connection management.</p></li>
+        <li id="rfc9113"><strong>[3] HTTP/2</strong><p>Thomson, M., &amp; Benfield, C. (Eds.). (2022). <cite>HTTP/2</cite>. RFC 9113.</p><a href="https://www.rfc-editor.org/rfc/rfc9113.html">Read RFC 9113 ↗</a><p class="source-note">The current HTTP/2 specification, including framing and streams.</p></li>
+        <li id="rfc9114"><strong>[4] HTTP/3</strong><p>Bishop, M. (Ed.). (2022). <cite>HTTP/3</cite>. RFC 9114.</p><a href="https://www.rfc-editor.org/rfc/rfc9114.html">Read RFC 9114 ↗</a><p class="source-note">Explains the mapping of HTTP onto QUIC.</p></li>
+        <li id="rfc9110"><strong>[5] HTTP semantics</strong><p>Fielding, R., Nottingham, M., &amp; Reschke, J. (Eds.). (2022). <cite>HTTP Semantics</cite>. RFC 9110.</p><a href="https://www.rfc-editor.org/rfc/rfc9110.html">Read RFC 9110 ↗</a><p class="source-note">Shared meanings of methods, fields, status codes, and URI schemes.</p></li>
+        <li id="rfc8446"><strong>[6] TLS 1.3</strong><p>Rescorla, E. (2018). <cite>The Transport Layer Security (TLS) Protocol Version 1.3</cite>. RFC 8446.</p><a href="https://www.rfc-editor.org/rfc/rfc8446.html">Read RFC 8446 ↗</a><p class="source-note">The technical foundation for the TLS discussion.</p></li>
+      </ol>
+    </section>
+    <section aria-labelledby="learning"><h2 id="learning">Learning resources</h2><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">MDN: HTTP overview</a> — explanations of requests, responses, and everyday HTTP behavior.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP">MDN: Evolution of HTTP</a> — a readable historical overview.</li><li><a href="https://ksuweb.github.io/IT3203/">IT 3203 class website</a> — course information and web development resources.</li></ul><p class="source-note">Research adapted from Deborah Daramola’s <cite>The Evolution of HTTP and HTTPS</cite>, Assignment 1, Fall 2026. Illustrations are original explanatory diagrams. External references checked October 17, 2026.</p></section>
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
+
+/* One stylesheet for all six pages. No framework or JavaScript is used. */
+/* Element selectors set the general page style. */
+body {
+  margin: 0;
+  background-color: #f2f2f2;
+  color: #222222;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Class selectors are used for shared parts of the site. */
+.site-header {
+  padding: 20px;
+  background-color: #244766;
+  color: white;
+  text-align: center;
+}
+.site-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: bold;
+}
+.site-header p { margin: 5px 0 15px; }
+
+/* Flexbox keeps the menu links together and lets them wrap. */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+}
+nav a { color: white; }
+nav a:hover { color: #ffdf91; }
+nav a[aria-current="page"] { font-weight: bold; }
+
+/* An ID selector styles the main content area. */
+#main {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+h1 { margin-top: 0; font-size: 30px; color: #244766; }
+h2 { font-size: 23px; color: #244766; }
+h3 { font-size: 19px; }
+section { margin: 25px 0; }
+p { margin: 12px 0; }
+li { margin-bottom: 8px; }
+a { color: #174b78; }
+a:hover { color: #883b16; }
+a:focus-visible { outline: 3px solid #bb6b16; outline-offset: 3px; }
+
+/* Images stay within the page, including on smaller screens. */
+img { display: block; max-width: 100%; height: auto; }
+figure { margin: 20px 0; }
+figcaption, .source-note { font-size: 14px; color: #555555; }
+
+/* A simple bordered table compares the versions of HTTP. */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+caption { margin-bottom: 10px; text-align: left; font-weight: bold; }
+th, td { border: 1px solid #aaaaaa; padding: 10px; text-align: left; vertical-align: top; }
+thead th { background-color: #e4edf5; }
+
+pre { padding: 15px; background-color: #eeeeee; border: 1px solid #cccccc; overflow-x: auto; }
+dt { font-weight: bold; }
+dd { margin: 5px 0 15px 20px; }
+.note { margin: 20px 0; padding: 15px; background-color: #edf3f8; border-left: 4px solid #244766; }
+footer { padding: 15px; text-align: center; background-color: #dddddd; font-size: 14px; }
+.skip-link { position: absolute; top: -60px; left: 10px; padding: 10px; background: white; }
+.skip-link:focus { top: 10px; }
+
+/* Basic support for narrow screens. */
+@media (max-width: 600px) {
+  #main { margin: 15px 10px; padding: 18px; }
+  h1 { font-size: 26px; }
+  nav { gap: 8px 15px; }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A web development research project by Deborah Daramola, built around the evolution of HTTP and HTTPS.">
+  <title>About the project</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="evolution.html">HTTP History</a>
+      <a href="https.html">HTTPS</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html" aria-current="page">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>About the project</h1>
+      <p>A web development research project by Deborah Daramola, built around the evolution of HTTP and HTTPS.</p>
+    </header>
+    
+      
+        <section><h2>About the author</h2><p>I am Deborah Daramola, and I created this website as a research project for IT 3203. My topic explores the evolution of HTTP and HTTPS and the relationship between web performance, communication, and security.</p><p>This project gives me a way to practice presenting technical information through a clear, accessible website. The content builds on my Assignment 1 research and connects protocol concepts to familiar browsing tasks.</p></section>
+        <section><h2>Project focus</h2><p>The site explains why HTTP changed, how HTTPS protects communication, and which concepts remain useful across versions. It aims to help a beginning web development student understand the connection between a browser request and the technologies carrying it.</p><h3>Skills demonstrated</h3><ul><li>Semantic HTML and a consistent structure across six pages.</li><li>One shared CSS stylesheet with element, class, and ID selectors.</li><li>CSS Grid and Flexbox, with readable navigation and page layouts.</li><li>Accessible images, a comparison table, and linked research citations.</li></ul></section>
+        <section><h2>Learning objectives</h2><ol><li>Explain the differences among major HTTP versions.</li><li>Distinguish secure transport from broader website trust.</li><li>Connect requests, responses, and status codes to real browser activity.</li><li>Present research with clear navigation and reliable references.</li></ol></section>
+        <section><h2>Milestone roadmap</h2><p>Milestone 1 establishes this informational HTML/CSS site. Later milestones will add a JavaScript knowledge quiz and develop the final responsive experience and research. This version includes basic flexible layouts so the content remains readable.</p><p class="source-note">This website is an educational project, not a commercial product or security assessment.</p></section>
+      
+    
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Short explanations and examples that connect protocol history to everyday web development.">
+  <title>Seven concepts to know</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="evolution.html">HTTP History</a>
+      <a href="https.html">HTTPS</a>
+      <a href="concepts.html" aria-current="page">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>Seven concepts to know</h1>
+      <p>Short explanations and examples that connect protocol history to everyday web development.</p>
+    </header>
+    
+      
+        <section id="request"><h2>Request</h2><p>A client message that asks a server to perform an operation on a resource. It identifies a method and target, includes fields, and may carry content.</p><pre><code>GET /index.html HTTP/1.1
+Host: example.edu</code></pre><p class="source-note">Illustrative HTTP/1.1 syntax. Source: <a href="references.html#rfc9110">[5]</a>.</p></section>
+        <section id="response"><h2>Response</h2><p>The server’s answer to a request. It communicates the result and can return a representation such as HTML, JSON, or an image.</p><pre><code>HTTP/1.1 200 OK
+Content-Type: text/html</code></pre><p class="source-note">Illustrative response headers. Source: <a href="references.html#rfc9110">[5]</a>.</p></section>
+        <section id="method"><h2>Method</h2><p>The operation named in a request. GET retrieves a representation, HEAD requests the corresponding metadata without response content, and POST asks the resource to process submitted content. A method name describes intent, not a security guarantee. <a href="references.html#rfc9110">[5]</a></p></section>
+        <section id="status"><h2>Status code</h2><p>A three-digit result code. The first digit groups the outcome: 1xx informational, 2xx successful, 3xx redirection, 4xx client error, and 5xx server error. Examples include 200 OK, 404 Not Found, and 503 Service Unavailable. <a href="references.html#rfc9110">[5]</a></p></section>
+        <section id="headers"><h2>Headers</h2><p>Fields that carry metadata or control information. Content-Type identifies a media type, while Cache-Control communicates caching instructions. Headers allow HTTP to support additional behavior without replacing its core message model. <a href="references.html#rfc9110">[5]</a></p></section>
+        <section id="tls"><h2>Transport Layer Security</h2><p>TLS establishes cryptographic protection between communicating endpoints. Modern HTTPS uses it to protect data in transit and usually authenticate the server. Certificates and session keys have different jobs: the certificate supports identity checks, while negotiated keys protect the data exchange. <a href="references.html#rfc8446">[6]</a></p></section>
+        <section id="multiplexing"><h2>Multiplexing</h2><p>Allowing multiple streams to share a connection. HTTP/2 interleaves frames from separate streams over TCP. HTTP/3 uses QUIC streams, reducing cross-stream delivery blocking caused by lost data. Shared congestion and other constraints still affect performance. <a href="references.html#rfc9113">[3]</a> <a href="references.html#rfc9114">[4]</a></p></section>
+        <p>Check the evidence <a href="references.html">Read the original sources ↗</a></p>
+      
+    
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A stable request–response idea, carried by changing message formats and network transports.">
+  <title>How HTTP evolved</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- The same header and menu appear on every page. -->
+  <header class="site-header">
+    <p class="site-title">HTTP and HTTPS</p>
+    <p>Deborah Daramola | IT 3203</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="evolution.html" aria-current="page">HTTP History</a>
+      <a href="https.html">HTTPS</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <!-- Main research content. -->
+  <main id="main">
+    <header>
+      <h1>How HTTP evolved</h1>
+      <p>A stable request–response idea, carried by changing message formats and network transports.</p>
+    </header>
+    
+      
+        <section id="early"><h2>The early Web</h2>
+          <p>The earliest HTTP, later called HTTP/0.9, handled a simple GET request and returned a document. It had no status line or header fields. HTTP/1.0 expanded the exchange with version information, metadata, and status codes, making different content types and error handling easier to support. <a href="references.html#rfc1945">[1]</a></p>
+          <p>HTTP/1.1 made persistent connections the default, so a connection could serve multiple exchanges. It also developed the rules needed for interoperable messaging and hosting. Its first specification appeared in 1997; RFC 9112 describes the modern HTTP/1.1 message format. <a href="references.html#rfc9112">[2]</a></p>
+        </section>
+        <section id="versions"><h2>Five stages of HTTP</h2><p>The dates below distinguish early use from specification publication. They do not mark universal adoption.</p>
+          <div class="table-container" role="region" aria-label="HTTP version comparison" tabindex="0">
+            <table><caption>HTTP versions and their main contributions</caption><thead><tr><th scope="col">Version</th><th scope="col">Historical marker</th><th scope="col">Main contribution</th><th scope="col">Important limitation</th></tr></thead><tbody>
+              <tr><th scope="row">HTTP/0.9</th><td>Early 1990s</td><td>A minimal GET request and document response.</td><td>No headers or status codes.</td></tr>
+              <tr><th scope="row">HTTP/1.0</th><td>RFC 1945, 1996</td><td>Headers, status information, and richer message types.</td><td>Connection reuse was not the default model.</td></tr>
+              <tr><th scope="row">HTTP/1.1</th><td>First specified in 1997</td><td>Persistent connections and mature message framing.</td><td>Pipelined responses must remain ordered.</td></tr>
+              <tr><th scope="row">HTTP/2</th><td>First standardized in 2015</td><td>Binary frames, multiplexed streams, and header compression.</td><td>TCP loss can delay all streams on a connection.</td></tr>
+              <tr><th scope="row">HTTP/3</th><td>RFC 9114, 2022</td><td>HTTP mapped onto QUIC, with independent stream delivery.</td><td>Benefits depend on the network and implementation.</td></tr>
+            </tbody></table>
+          </div>
+          <p class="source-note">Sources: <a href="references.html#rfc1945">[1]</a>, <a href="references.html#rfc9112">[2]</a>, <a href="references.html#rfc9113">[3]</a>, <a href="references.html#rfc9114">[4]</a>.</p>
+        </section>
+        <section id="performance"><h2>What changed beneath the messages?</h2>
+          <h3>HTTP/2: multiple streams on one connection</h3><p>HTTP/2 divides messages into binary frames and interleaves streams. Several requests can progress over one TCP connection. This changes transmission rather than replacing familiar HTTP meanings such as GET and 404. TCP still delivers bytes in order, so a missing packet can hold up otherwise independent streams. <a href="references.html#rfc9113">[3]</a></p>
+          <h3>HTTP/3: a different transport</h3><p>HTTP/3 maps HTTP onto QUIC, which runs over UDP and incorporates TLS 1.3. QUIC provides reliable streams. Lost data on one stream need not prevent delivery on another stream, although the connection still shares network capacity. HTTP/3 is not simply “unreliable HTTP” because it uses UDP underneath. <a href="references.html#rfc9114">[4]</a></p>
+          <aside class="note"><h3>The lasting idea</h3><p>Versions change framing and transport while preserving shared semantics. A protocol version describes how HTTP travels; HTTPS describes protection of the connection. <a href="references.html#rfc9110">[5]</a></p></aside>
+        </section>
+        <section id="observe"><h2>Observe an HTTP exchange</h2><ol><li>Open your browser’s developer tools and select the Network panel.</li><li>Reload a page and select a document request.</li><li>Inspect its method, status code, and response headers.</li><li>Enable the Protocol column if available to compare HTTP versions.</li></ol><p>Your result depends on the browser, server, and network. A single observation does not establish which version is fastest.</p></section>
+        <p>Next chapter <a href="https.html">HTTPS &amp; security ↗</a></p>
+      
+    
+  </main>
+  
+  <footer>
+    <p>Created by Deborah Daramola | Fall 2026</p>
+    <p>This is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203 Web Development</a>.</p>
+  </footer>
+</body>
+</html>
